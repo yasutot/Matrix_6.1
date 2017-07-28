@@ -3,17 +3,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
-import cadastros from './components/cadastros.vue';
-import formulario from './components/formulario.vue';
+import { routes } from './routes';
 
 Vue.use(VueRouter);
 
 Vue.config.productionTip = false
-
-const routes = [
-  { path: '/cadastros', component: cadastros },
-  { path: '/', compontents: formulario }
-];
 
 const router = new VueRouter({
   routes,
@@ -24,6 +18,5 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
-  //template: '<App/>',
-  //components: { App }
-}).$mount('#app');
+  render: h => h(App)
+})

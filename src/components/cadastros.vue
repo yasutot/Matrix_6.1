@@ -11,31 +11,47 @@
         <div class="container">
             <h1 align="center">Cadastros Efetuados</h1>
         </div>
-        <div class="container"> 
+        <div class="container">
+            <div class="row">
+              <form action="#">
+                <div class="col s4 cent er">
+                  <input name="group1" type="radio" id="local" v-on:click="armazenamento(1)"/>
+                  <label for="local">Somente localStorage</label>
+                </div>
+                <div class="col s4 center">
+                  <input name="group1" type="radio" id="fire" v-on:click="armazenamento(2)"/>
+                  <label for="fire">Somente Firebase</label>
+                </div>
+                <div class="col s4 center">
+                  <input name="group1" type="radio" id="todos" v-on:click="armazenamento(3)"/>
+                  <label for="todos">Todos</label>
+                </div>
+              </form>
+            </div>
             <table class="highlight striped centered">
                 <thead>
-                    <th>Email</th>
-                    <th>Nome</th>
-                    <th>Sexo</th>                    
-                    <th>Curso</th>
-                    <th>Endereço</th>
-                    <th>Complemento</th>
-                    <th>CEP</th>
-                    <th>Municipio</th>
-                    <th>UF</th>
+                  <th>Email</th>
+                  <th>Nome</th>
+                  <th>Sexo</th>                    
+                  <th>Curso</th>
+                  <th>Endereço</th>
+                  <th>Complemento</th>
+                  <th>CEP</th>
+                  <th>Municipio</th>
+                  <th>UF</th>
                 </thead>
                 <tbody>
-                    <tr v-for="inscrito in inscritos">
-                        <td>{{ inscritos.email }}</td>
-                        <td>{{ inscritos.nome }}</td>
-                        <td>{{ inscritos.sexo }}</td>
-                        <td>{{ inscritos.curso }}</td>
-                        <td>{{ inscritos.endereco }}</td>
-                        <td>{{ inscritos.complemento }}</td>
-                        <td>{{ inscritos.cep }}</td>
-                        <td>{{ inscritos.municipio }}</td>
-                        <td>{{ inscritos.uf }}</td>
-                    </tr>
+                  <tr v-for="cadastro in cadastros">
+                    <td>{{ cadastro.email }}</td>
+                    <td>{{ cadastro.nome }}</td>
+                    <td>{{ cadastro.sexo }}</td>
+                    <td>{{ cadastro.curso }}</td>
+                    <td>{{ cadastro.endereco }}</td>
+                    <td>{{ cadastro.complemento }}</td>
+                    <td>{{ cadastro.cep }}</td>
+                    <td>{{ cadastro.municipio }}</td>
+                    <td>{{ cadastro.uf }}</td>
+                  </tr>
                 </tbody>
             </table>
             <div class="row center">
@@ -54,26 +70,36 @@
     </div>
 </template>
 
+
 <script>
-/*
-  import Firebase from 'firebase'
-  let config = {
-    apiKey: "AIzaSyCA0lVGbPYTNxqZDJH9rM_1X0-KdPS7gMc",
-    authDomain: "matrix-9fe37.firebaseapp.com",
-    databaseURL: "https://matrix-9fe37.firebaseio.com",
-    projectId: "matrix-9fe37",
-    storageBucket: "matrix-9fe37.appspot.com",
-    messagingSenderId: "536206031808"
-  }
-  let app = Firebase.initializeApp(config);
-  let db = app.database();
+  import db from '../../src/firebase.js'
   let inscritosRef = db.ref('inscritos');
+
 
   export default {
     name: 'app',
     firebase: {
         inscritos: inscritosRef
     },
+    data () {
+      return {
+        cadastros: []
+      }
+    },
+    methods: {
+      armazenamento(tipo) {
+        if (tipo === 1){
+          this.cadastros = '';
+          var getLocal = JSON.parse(localStorage.getItem("inscritos"));
+          this.cadastros = getLocal;
+        } else {
+          if (tipo === 2){
+              var inscritosFire = firebase.inscritosRef;
+              this.cadastros = '';
+              this.cadastros = inscritosFire;
+          }
+        }
+      }
+    }
   }
-  */
 </script>

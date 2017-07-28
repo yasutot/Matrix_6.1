@@ -112,6 +112,7 @@
 
 
 <script>
+/*
   import Firebase from 'firebase'
   let config = {
     apiKey: "AIzaSyCA0lVGbPYTNxqZDJH9rM_1X0-KdPS7gMc",
@@ -121,9 +122,12 @@
     storageBucket: "matrix-9fe37.appspot.com",
     messagingSenderId: "536206031808"
   }
-
+  */
+  import db from '../../src/firebase.js'
+  /*
   let app = Firebase.initializeApp(config);
   let db = app.database();
+  */
   let inscritosRef = db.ref('inscritos');
 
   export default {
